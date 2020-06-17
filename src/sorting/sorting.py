@@ -43,8 +43,13 @@ def merge_sort(arr):
 # or data structures; it can only re-use the memory it was given as input
 def merge_in_place(arr, start, mid, end):
     # Your code here
-    return -1
+    pass       
 
 def merge_sort_in_place(arr, l, r):
     # Your code here
-    return -1
+    if l < r:
+        mid = (l + r)//2
+        merge_sort_in_place(arr, l, mid)
+        merge_sort_in_place(arr, mid + 1, r)
+        return merge_in_place(arr, l, mid, r)
+    
