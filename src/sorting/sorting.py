@@ -4,14 +4,36 @@ def merge(arrA, arrB):
     merged_arr = [0] * elements
 
     # Your code here
+    pointerA = 0
+    pointerB = 0
 
+    for i in range(elements):
+        if pointerA == len(arrA):
+            merged_arr[i] = arrB[pointerB]
+            pointerB += 1
+        elif pointerB == len(arrB):
+            merged_arr[i] = arrA[pointerA]
+            pointerA += 1
+        elif arrA[pointerA] < arrB[pointerB]:
+            merged_arr[i] = arrA[pointerA]
+            pointerA += 1
+        elif arrB[pointerB] < arrA[pointerA]:
+            merged_arr[i] = arrB[pointerB]
+            pointerB += 1
+        else:
+            merged_arr[i] = arrA[pointerA]
+            pointerA += 1
+            pointerB += 1
 
     return merged_arr
 
 # TO-DO: implement the Merge Sort function below recursively
 def merge_sort(arr):
     # Your code here
-
+    if len(arr) > 1:
+        leftArr = merge_sort(arr[0:len(arr)//2])
+        rightArr = merge_sort(arr[len(arr)//2:])
+        return merge(leftArr, rightArr)
 
     return arr
 
@@ -21,8 +43,13 @@ def merge_sort(arr):
 # or data structures; it can only re-use the memory it was given as input
 def merge_in_place(arr, start, mid, end):
     # Your code here
-
+    pass       
 
 def merge_sort_in_place(arr, l, r):
     # Your code here
-
+    if l < r:
+        mid = (l + r)//2
+        merge_sort_in_place(arr, l, mid)
+        merge_sort_in_place(arr, mid + 1, r)
+        return merge_in_place(arr, l, mid, r)
+    
